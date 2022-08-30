@@ -14,7 +14,7 @@
 
 // Execute `rustlings hint quiz3` or use the `hint` watch subcommand for a hint.
 
-// I AM NOT DONE
+use std::fmt;
 
 pub struct ReportCard {
     pub grade: f32,
@@ -22,10 +22,24 @@ pub struct ReportCard {
     pub student_age: u8,
 }
 
+impl fmt::Display for ReportCard {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(
+            f,
+            "{} ({}) - achieved a grade of {}",
+            self.student_name,
+            self.student_age,
+            match self.grade {
+                g if g > 10.0 => "A+".to_string(),
+                g => self.grade.to_string(),
+            }
+        )
+    }
+}
+
 impl ReportCard {
     pub fn print(&self) -> String {
-        format!("{} ({}) - achieved a grade of {}",
-            &self.student_name, &self.student_age, &self.grade)
+        format!("{}", self)
     }
 }
 
@@ -48,9 +62,8 @@ mod tests {
 
     #[test]
     fn generate_alphabetic_report_card() {
-        // TODO: Make sure to change the grade here after you finish the exercise.
         let report_card = ReportCard {
-            grade: 2.1,
+            grade: 10.5,
             student_name: "Gary Plotter".to_string(),
             student_age: 11,
         };
