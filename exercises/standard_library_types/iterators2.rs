@@ -10,8 +10,8 @@ pub fn capitalize_first(input: &str) -> String {
     let mut c = input.chars();
     match c.next() {
         None => String::new(),
-        Some(first) => first.to_uppercase().(c).collect(),
-    }chain
+        Some(first) => first.to_uppercase().chain(c).collect(),
+    }
 }
 
 // Step 2.
